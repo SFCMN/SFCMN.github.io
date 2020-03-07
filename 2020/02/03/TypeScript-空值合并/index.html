@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+  
+  <title>TypeScript: Nullish Coalescing (空值合并) —— ?? - 十甫寸木南</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="十甫寸木南的个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="2iXfn3_CkEXR1irll32gr3zuLZJKrSooFf2NXDGDMdo" />
+
+
+  <link rel="shortcut icon" href="/SFCMN-logo.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript: Nullish Coalescing (空值合并) —— ??">
+<meta property="og:url" content="https://sfcmn.github.io/2020/02/03/TypeScript-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6/index.html">
+<meta property="og:site_name" content="十甫寸木南">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/mengbi.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/jilinggui.gif">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/2mengbi.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/04.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/3mengbi.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/ai.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/zheyanga.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/kaixin.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/ninggu.jpg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/shanziji.gif">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/quede.jpeg">
+<meta property="og:image" content="https://sfcmn.github.io/images/ts-null-value/biantai.jpeg">
+<meta property="article:published_time" content="2020-02-03T14:03:56.000Z">
+<meta property="article:modified_time" content="2020-03-07T17:07:27.453Z">
+<meta property="article:author" content="十甫寸木南">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="心路">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sfcmn.github.io/images/ts-null-value/mengbi.jpeg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583601944084">-->
+
+   
+    <style>
+      .nexmoe-avatar img:hover {
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+      }	
+    </style>
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(http://pic.netbian.com/uploads/allimg/190106/181813-15467698938ac9.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="十甫寸木南" class="mdui-btn mdui-btn-icon"><img src="/SFCMN-logo.png" alt="十甫寸木南"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="十甫寸木南">
+            <img src="/SFCMN-logo.png" alt="十甫寸木南" alt="十甫寸木南">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的收藏">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的收藏
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=site:sfcmn.github.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/sfcmn/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Tagcloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/%E5%BF%83%E8%B7%AF/" style="font-size: 10px;">心路</a> <a href="/tags/%E7%B2%BE%E7%AE%80/" style="font-size: 10px;">精简</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 十甫寸木南
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
+          <img data-src="http://pic.netbian.com/uploads/allimg/190824/203550-1566650150c097.jpg" data-sizes="auto" alt="TypeScript: Nullish Coalescing (空值合并) —— ??" class="lazyload">
+          <h1>TypeScript: Nullish Coalescing (空值合并) —— ??</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年02月03日</a>
+    <a><i class="nexmoefont icon-areachart"></i>831 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#定义"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#代码对比"><span class="toc-number">2.</span> <span class="toc-text">代码对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意-真正的好处"><span class="toc-number">3.</span> <span class="toc-text">注意( ?? 真正的好处)</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <!-- 以上为文章概述 -->
+<a id="more"></a>
+<!-- 以下为正文 -->
+
+<p>Created By: 十甫寸木南<br>Last Edited: Feb 03, 2020 10:03 PM</p>
+<p>看到这篇文章标题的第一眼，是不是有点懵呢？</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/mengbi.jpeg" alt="mengbi" class="lazyload"></p>
+<p>好吧，可能知道的人一点儿也不懵，但是，不知道的人肯定是懵的！这点，毋庸置疑，比如我自己😂😂</p>
+<p>说实话，第一次看到这两个单词 “Nullish Coalescing” 的时候，我是非常懵的，因为第 2 个单词我不认识😂（请原谅我的愚蠢）。</p>
+<p>经过查阅资料(翻译)，我认识了这个单词 “coalesce” ,它是个动词，是 “合并，联合” 的意思😄。</p>
+<p>所以，这个 “Nullish Coalescing” 整体的意思呢，就是 “<strong>空值合并</strong>”。</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/jilinggui.gif" alt="jilinggui" class="lazyload"></p>
+<p>但是，虽然 “空”、“值”、“合”、“并” 这 4 个字我都认识，但是，合在一起后，我就又不认识了😢</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/2mengbi.jpeg" alt="2mengbi" class="lazyload"></p>
+<p>于是，我又继续往下看了看，突然，我似乎明白了！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/04.png" alt="zhenxiang" class="lazyload"></p>
+<p>我看到了一个操作符!</p>
+<p>没错，就是 ——&gt; <strong><code>??</code></strong></p>
+<p>好吧，虽然看到了 <code>??</code> ，但我还是不明白这个 <code>??</code> 到底代表的是什么？</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/3mengbi.jpeg" alt="3mengbi" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/ai.jpeg" alt="ai" class="lazyload"></p>
+<p>我还是看看<a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing" target="_blank" rel="noopener">官方爸爸的文档</a>吧！</p>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>遇到一个新的概念，先看定义！</p>
+<p>官方爸爸给出的定义是这样的：</p>
+<p><em>The nullish coalescing operator is another upcoming ECMAScript feature that goes hand-in-hand with optional chaining, and which our team has been involved with championing in TC39.</em></p>
+<p>em…</p>
+<p>即将到来的 <em>ECMAScript 的</em>功能？有点小期待呢😄</p>
+<p>好吧，这句话没啥用！继续往下看！</p>
+<p><em>You can think of this feature - the ?? operator - as a way to “fall back” to a default value when dealing with null or undefined.</em></p>
+<p>咦咦咦！似乎有点意思哦！继续往下看！</p>
+<pre><code>let x = foo ?? bar();</code></pre><p>一行代码，而且用到了主角 <code>??</code> ，那么，这个神秘的 <code>??</code> 到底起什么作用呢？</p>
+<p>官方爸爸再次给出了一句话：</p>
+<p><strong><em>this is a new way to say that the value foo will be used when it’s “present”; but when it’s null or undefined, calculate bar() in its place.</em></strong></p>
+<p>看到这里，我恍然大悟！</p>
+<p>原来如此！搜噶！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/zheyanga.jpeg" alt="zheyanga" class="lazyload"></p>
+<p>简单来说，<strong>在 <code>let x = foo ?? bar();</code> 中，如果 <code>foo</code> 为 <code>null</code> 或 <code>undefined</code> ,则 <code>x = bar()</code> , 否则 <code>x = foo</code> ;</strong></p>
+<h2 id="代码对比"><a href="#代码对比" class="headerlink" title="代码对比"></a>代码对比</h2><p>看完了官方的解释，我真是差点笑出猪叫😂</p>
+<p>话不多说，来看下代码对比：</p>
+<ul>
+<li><p>版本一：</p>
+<pre><code>  let x = (foo !== null &amp;&amp; foo !== undefined)
+      ? foo
+      : bar();</code></pre></li>
+<li><p>版本二：</p>
+<pre><code>  let x = foo ?? bar();</code></pre></li>
+</ul>
+<p>简直不要太方便啊！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/kaixin.jpeg" alt="kaixin" class="lazyload"></p>
+<p>突然，我想到一个问题，虽然这个 <code>??</code> 确实很方便，但是，我以前也可以很方便的实现啊！</p>
+<p>比如这样：</p>
+<pre><code>let x = foo || bar();</code></pre><p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/ninggu.jpg" alt="ninggu" class="lazyload"></p>
+<p>突然，我又给了自己一巴掌，真是傻*！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/shanziji.gif" alt="shanziji" class="lazyload"></p>
+<h2 id="注意-真正的好处"><a href="#注意-真正的好处" class="headerlink" title="注意( ?? 真正的好处)"></a>注意( ?? 真正的好处)</h2><pre><code>let x = foo || bar();</code></pre><p>这行代码虽然看似也解决了 <code>foo</code> 为 <code>null</code> 或 <code>undefined</code> 的这个难题，但是，这行代码其实是一个真正的货真价实的坑货！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/quede.jpeg" alt="quede" class="lazyload"></p>
+<p>存在一种情况，如果 <code>foo = 0</code></p>
+<p>这个时候，简直是 B le 🐶了，<code>0</code> 默认和 <code>false</code> 是相等的，也就是说，这个时候，即便 <code>foo</code> 实际上是有值的(虽然为 <code>0</code> )，但是，最终的结果依旧会是 <code>x = bar()</code> 。</p>
+<p>这简直错到离谱！</p>
+<p>但是，很多时候，我们往往会出现这样的思维误区，并且难以发现！</p>
+<p>而 <strong><code>??</code></strong> 就避免了这样的隐患！</p>
+<p>所以，<strong>如果你的 TypeScript 版本在 3.7 以上，那么请使用 <code>??</code></strong> ,而不是下面的愚蠢形式：⬇️</p>
+<pre><code>let x = (foo !== null &amp;&amp; foo !== undefined)
+    ? foo
+    : bar();</code></pre><p><strong>如果你的 TypeScript 版本在 3.7 以下，请尽量升到 3.7 以上！</strong></p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/ts-null-value/biantai.jpeg" alt="biantai" class="lazyload"></p>
+
+  </article>
+
+  <div class="nexmoe-post-meta">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/TypeScript/" rel="tag">TypeScript</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/%E5%BF%83%E8%B7%AF/" rel="tag">心路</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>十甫寸木南<br>
+    <strong>Link：</strong><a href="https://sfcmn.github.io/2020/02/03/TypeScript-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6/" title="https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;02&#x2F;03&#x2F;TypeScript-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;02&#x2F;03&#x2F;TypeScript-%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'e6da0e58c0cd2888315f',
+        clientSecret: 'f587c3d7b4922bf0a1bc45cae20a6e1a1bb4c625',
+        id: window.location.pathname,
+        repo: 'SFCMN.github.io',
+        owner: 'SFCMN',
+        admin: 'SFCMN'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1583601944085"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+ 
+<script> 
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

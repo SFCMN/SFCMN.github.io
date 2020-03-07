@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+  
+  <title>Git 记录：mv - 十甫寸木南</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="十甫寸木南的个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="2iXfn3_CkEXR1irll32gr3zuLZJKrSooFf2NXDGDMdo" />
+
+
+  <link rel="shortcut icon" href="/SFCMN-logo.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Git 记录：mv">
+<meta property="og:url" content="https://sfcmn.github.io/2020/01/18/Git-%E8%AE%B0%E5%BD%95%EF%BC%9Amv/index.html">
+<meta property="og:site_name" content="十甫寸木南">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/01.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/02.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/03.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/04.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/05.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/06.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/07.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/08.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/09.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/10.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/11.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/12.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/13.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/14.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/15.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/16.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/17.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/18.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/19.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/20.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/21.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/22.png">
+<meta property="og:image" content="https://sfcmn.github.io/images/git-mv/23.png">
+<meta property="article:published_time" content="2020-01-18T06:22:58.000Z">
+<meta property="article:modified_time" content="2020-03-07T17:07:27.452Z">
+<meta property="article:author" content="十甫寸木南">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sfcmn.github.io/images/git-mv/01.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583601944086">-->
+
+   
+    <style>
+      .nexmoe-avatar img:hover {
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+      }	
+    </style>
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(http://pic.netbian.com/uploads/allimg/190106/181813-15467698938ac9.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="十甫寸木南" class="mdui-btn mdui-btn-icon"><img src="/SFCMN-logo.png" alt="十甫寸木南"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="十甫寸木南">
+            <img src="/SFCMN-logo.png" alt="十甫寸木南" alt="十甫寸木南">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的收藏">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的收藏
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=site:sfcmn.github.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/sfcmn/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Tagcloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/%E5%BF%83%E8%B7%AF/" style="font-size: 10px;">心路</a> <a href="/tags/%E7%B2%BE%E7%AE%80/" style="font-size: 10px;">精简</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 十甫寸木南
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
+          <img data-src="http://pic.netbian.com/uploads/allimg/191120/221304-157425918438c0.jpg" data-sizes="auto" alt="Git 记录：mv" class="lazyload">
+          <h1>Git 记录：mv</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月18日</a>
+    <a><i class="nexmoefont icon-areachart"></i>3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 12 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-mv-的定义"><span class="toc-number">1.</span> <span class="toc-text">Git mv 的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-mv-的用法"><span class="toc-number">2.</span> <span class="toc-text">Git mv 的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Description-amp-options"><span class="toc-number">3.</span> <span class="toc-text">Description &amp; options</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#f-—-force"><span class="toc-number">3.1.</span> <span class="toc-text">-f | —-force</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#k"><span class="toc-number">3.2.</span> <span class="toc-text">-k</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#n-—dry-run"><span class="toc-number">3.3.</span> <span class="toc-text">-n | —dry-run</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#v-—verbose"><span class="toc-number">3.4.</span> <span class="toc-text">-v | —verbose</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#呃。。。"><span class="toc-number">4.</span> <span class="toc-text">呃。。。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <!-- 以上为文章概述 -->
+<a id="more"></a>
+<!-- 以下为正文 -->
+
+<p>Created By: 十甫寸木南<br>Last Edited: Jan 18, 2020 2:22 PM</p>
+<p><a href="#git-mv-的定义">Git mv 的定义</a><br><a href="#git-mv-的用法">Git mv 的用法</a><br><a href="#description-&-options">Description &amp; options</a><br><a href="#总结">总结</a></p>
+<p>其实关于 <code>git mv</code> 这条命令，还是在看官方文档的时候无意中看到的，当时第一反应是：<code>mv</code> 不是 <strong>Shell</strong> 命令吗？怎么 <strong>Git</strong> 中也有 <code>mv</code> 命令，而且还不止，还有 <code>rm</code> 、<code>ls-files</code> 、<code>ls-tree</code> 这样的极具 <strong>Shell</strong> 特色的命令！</p>
+<p>于是呢，我决定探究一番！</p>
+<h2 id="Git-mv-的定义"><a href="#Git-mv-的定义" class="headerlink" title="Git mv 的定义"></a>Git mv 的定义</h2><p>学习一个新的事物，必然第一件事是先看这个东西是什么，即它的定义。</p>
+<p><a href="https://git-scm.com/docs/git-mv" target="_blank" rel="noopener">官网</a>给的解释是这样的：“Move or rename a file, a directory, or a symlink.”<br>其实意思很简单，“<strong>移动或重命名一个文件或目录，或符号链接。</strong>”</p>
+<p>看到这里，我稍微有点疑惑，这个<strong>符号链接(symlink)</strong>是个什么东西呢？待我之后再去探究一番！😂</p>
+<p>这里，应该是不影响理解 <code>git mv</code> 这个命令的，于是，我接着看了下去。</p>
+<h2 id="Git-mv-的用法"><a href="#Git-mv-的用法" class="headerlink" title="Git mv 的用法"></a>Git mv 的用法</h2><p>看完官网对 <code>git mv</code> 这个命令的解释后，我没有立即看下去，而是打开了 <a href="https://iterm2.com/" target="_blank" rel="noopener">iterm</a> ，想要先看一下这个命令的用法。</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/01.png" alt="01" class="lazyload"></p>
+<p>于是呢，我又有疑惑出现了：<code>git mv [&lt;options&gt;] &lt;source&gt;... &lt;destination&gt;</code> 中 <code>source</code> 后面的 <code>...</code> 是什么意思呢？</p>
+<p>可以一次对多个文件操作？</p>
+<p>既然这条命令的作用是<strong>移动或重命名文件</strong>，难道说重命名文件可以一次重命名多个文件？那怎么区分哪个是重命名前的文件，哪个是重命名后的文件呢？<code>git mv a b c d</code> ?This is 开玩笑呢吧？</p>
+<p>可是， <strong>Usage</strong> 中显示的 source 和 destination 明显是源和目的地的意思啊！</p>
+<p>等等！👀</p>
+<p>我似乎知道了！</p>
+<p>虽然说重命名文件的话，如果一次写了多个源文件，比如 <code>git mv a b c d</code> 这样，根本没办法区分开源文件名和目标文件名，但是，如果是移动的话，就没问题了！比如：<code>git mv a b c d dir/</code> ，这样的话完全可以只用最后一个参数来做识别；如果最后一个参数代表的是个目录，而前面又有多个参数，那么就说明这条命令此时的用法应该是<strong>移动</strong>！</p>
+<p>也就是说，<code>git mv</code> 这条命令其实有两种用法：</p>
+<ul>
+<li><strong>move ，即移动文件或目录</strong></li>
+<li><strong>rename ，即重命名文件或目录</strong></li>
+</ul>
+<p>想到这儿，我一下子感觉豁然开朗！</p>
+<p>既然如此的话，试一下呗！</p>
+<p>先做好预备工作，现在暂存区里有 4 个文件，分别是：<code>a</code> 、<code>b</code> 、<code>c</code> 、<code>d</code></p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/02.png" alt="02" class="lazyload"></p>
+<p>首先先验证一下，是不是我之前猜想的<strong>无法一次性重命名多个文件</strong>这个猜想是正确的呢？</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/03.png" alt="03" class="lazyload"></p>
+<p>错误提示：<code>destination &#39;dd&#39; is not a directory</code></p>
+<p>很明显，我的猜想是对的，而且也从侧面验证了，我的猜想十有八九是对的，即： <code>**git mv</code> 这条命令是以最后一个参数作为一个标识符来判断当前这条命令执行的应该是 move 还是 rename 的。**</p>
+<p>不过，写到这里，我再次产生了一个疑惑，因为我看到错误提示说的是 <code>destination &#39;dd&#39; is not a directory</code> ，不是一个目录？为什么提示说不是一个目录？它怎么知道应该提示不是一个<strong>目录</strong>，而不是提示参数过多呢？</p>
+<p>难道说，这条命名底层的实现机制其实是先检查参数个数，如果参数个数为 2 ，说明是重命名文件；如果参数个数 &gt; 2 ，说明是移动文件！</p>
+<p>可是也不对啊，即便参数个数是 2 ，也可以是移动一个文件到某一个目录下啊！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/04.png" alt="04" class="lazyload"></p>
+<p>我明白了！</p>
+<p>真相只有一个，<code>**git mv</code> 会先去检查参数个数**：</p>
+<ul>
+<li><p>参数个数 &gt; 2 ，则说明是移动多个文件或目录到某一个指定的目录下</p>
+</li>
+<li><p>参数个数 =2 ，则说明操作的是单个文件或目录</p>
+<p>  操作单个文件或目录的情况下，</p>
+<ul>
+<li>如果是 文件 → 文件，那必然是重命名</li>
+<li>如果是文件 → 目录，那就是移动</li>
+<li>如果是 目录 → 目录，应该和 Shell 命令 mv是一致的，要看后一个目录后有没有跟 <code>/</code></li>
+</ul>
+</li>
+</ul>
+<p>当然了，这些其实应该都算是 Shell mv 命令的机制吧？毕竟 Shell 下 mv 命令也是有两重作用的！</p>
+<p>不过呢，之前看 mv 命令的时候也没有想到过这么多，就当是自己学习了！而且，我觉得这样一番探究下来，对我自己的收获也很大！</p>
+<p>不过呢，这都是我自己的猜测，虽然我觉得应该八九不离十，但是，毕竟我没有去看这个命令的源码！待我有时间了去看一下源码，探究一下究竟是不是我猜测的这样！</p>
+<p>到这里呢，其实我觉得对这个命令的基础部分已经猜测完毕了，但是呢，毕竟是个 <strong>Git</strong> 命令，肯定会和 <strong>Git</strong> 相关，会和工作区或者暂存区，甚至存储库有关系，要不然直接用 <code>mv</code> 了，为啥要多此一举前面加个 <code>git</code> 呢？</p>
+<p>而且其实在前面的尝试中，我已经看到了一个现象，那就是：<strong>使用 <code>git mv</code> 命令后，所有的改动都会直接被 <code>add</code> 到暂存区中</strong>，即：⬇️</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/05.png" alt="05" class="lazyload"></p>
+<p>似乎很方便的亚子啊！😄节省了好多步骤，如果用 Shell 命令的话，似乎得 2 步才可以：</p>
+<pre><code>mv a aa        # 重命名文件a为aa
+git add a aa   # 将 delete a 的操作和 new file 加入到暂存区</code></pre><p>确实方便了很多啊，那么，既然这么有趣又方便，那就继续看呗！</p>
+<p>不过，自己能猜到的已经都猜完了，接下来就继续看文档吧！😄</p>
+<h2 id="Description-amp-options"><a href="#Description-amp-options" class="headerlink" title="Description &amp; options"></a>Description &amp; options</h2><p>再次回到官方文档，映入眼帘的是一段描述：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/06.png" alt="06" class="lazyload"></p>
+<p>我擦，这不是和我的猜测一模一样吗？😁😁😁看到这里，还是很开心的。虽然是一个很简单的命令，但是以我目前这个菜鸟级别的水平来说，我觉得还是很欣慰的😂</p>
+<p>OK，那既然描述和我的猜测一样，那就不去深究了，大概看一下就可以了，继续往下看参数部分吧！</p>
+<p>参数部分呢，其实从之前用法的部分和上面官网上给的描述中都可以看出，<code>git mv</code> 这条命令有 4 个可用的参数选项，分别是：</p>
+<ul>
+<li><code>-f | —-force</code></li>
+<li><code>-k</code></li>
+<li><code>-n | —-dry-run</code></li>
+<li><code>-v | —-verbose</code></li>
+</ul>
+<p>就一个一个来看吧：</p>
+<h3 id="f-—-force"><a href="#f-—-force" class="headerlink" title="-f | —-force"></a><code>-f | —-force</code></h3><p>其实看到 <strong>force</strong> 这个单词就应该明白了，<strong>强制</strong>的意思，既然是强制，为什么要强制呢？</p>
+<p>必然有原因造成无法直接成功执行 <code>git mv</code> ，那又是个什么情况呢？<strong>文件或目录已存在！造成命名冲突！</strong></p>
+<p>除了这个原因，我想不出什么其他的！</p>
+<p>话不多说，来试一下就知道了：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/07.png" alt="07" class="lazyload"></p>
+<p>果然，当要重命名的目标名已被占用，即文件 b 已存在的情况下，是无法执行成功的！来看一下当前的文件目录及 git 状态：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/08.png" alt="08" class="lazyload"></p>
+<p>文件毫无变化！</p>
+<p>OK，那来试一下 <code>-f</code> 吧，如果真的是强制更改的话，我觉得应该会直接覆盖掉 b 文件，为了验证这一点，我先给两个文件里都写点内容吧：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/09.png" alt="09" class="lazyload"></p>
+<p>好，可以区分开这两个文件了，那就尝试一下：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/10.png" alt="10" class="lazyload"></p>
+<p>果然直接覆盖掉了，没有问题！好，来看一下官方的解释吧：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/11.png" alt="11" class="lazyload"></p>
+<p><strong>强制重命名或移动一个文件，即使目标存在！</strong></p>
+<p>我觉得我猜得还是很准的！😊下一个，come on!</p>
+<h3 id="k"><a href="#k" class="headerlink" title="-k"></a><code>-k</code></h3><p><code>-k</code> 这个参数吧，没给 long 形式，我也猜不出啥意思😂还是来看官方给的解释吧：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/12.png" alt="12" class="lazyload"></p>
+<p>一长串，懒得看了，直接翻译吧：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/13.png" alt="13" class="lazyload"></p>
+<p><strong>跳过移动或重命名可能导致错误情况的动作（除非给出 <code>-f</code>）</strong>&lt;后面的那句翻译有点烂😂&gt;</p>
+<p>理解加猜测一下呗：如果有错误情况发生，就跳过！</p>
+<p>？？？那岂不是说，没有发生错误的可以继续正常执行？</p>
+<p>那这也就说明双参数的肯定不在考虑范围内，当然，考虑也行，但是只改一个文件，出错跳过和出错退出没啥区别啊！</p>
+<p>OK，那就试一下呗：</p>
+<p>既然要试多参情况，容我先建个目录：</p>
+<p>首先是上次的改动，我就留着了：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/14.png" alt="14" class="lazyload"></p>
+<p>然后呢，建目录，目录中建文件：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/15.png" alt="15" class="lazyload"></p>
+<p>将改动全部提交：</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/16.png" alt="16" class="lazyload"></p>
+<p>准备工作有点多哈，没关系，所有的准备都是为了更好的实验，来吧，Come on!</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/17.png" alt="17" class="lazyload"></p>
+<p>看来确实如此！</p>
+<p><code>**-k</code> 参数会在某个文件执行错误时跳过该文件，继续执行其他的文件！**</p>
+<h3 id="n-—dry-run"><a href="#n-—dry-run" class="headerlink" title="-n | —dry-run"></a><code>-n | —dry-run</code></h3><p>这个有单词解释，<strong>dry-run</strong> ，原谅我英语不好，于是我查了一下，<strong>空运行</strong>的意思！</p>
+<p>惯例，来让我先猜一下，空运行，不运行？假运行？难道是说虽然敲了回车，但是并没有执行？有病啊！😂</p>
+<p>好吧，还是看看官网的解释吧！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/18.png" alt="18" class="lazyload"></p>
+<p><strong>什么也不做；仅显示将发生什么。</strong></p>
+<p>搜得思内！</p>
+<p>相当于一个 <strong>precheck</strong> ，不真正地执行命令，但是会将真正执行命令时会发生的事全部打印出来，就像 log 一样。</p>
+<p>好吧，看起来挺简单，试一下呗！（为省事期间，上次执行命令的结果我直接提交了，就不贴图了）</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/19.png" alt="19" class="lazyload"></p>
+<p>这个感觉挺简单的，我就不细解释了，直接下一个吧！</p>
+<h3 id="v-—verbose"><a href="#v-—verbose" class="headerlink" title="-v | —verbose"></a><strong><code>-v | —verbose</code></strong></h3><p>好吧，英语不好真TM吃亏，待我查一下：<strong>verbose 冗长的</strong></p>
+<p>什么鬼？我咋有点不明白呢？</p>
+<p>直接看官网解释吧！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/20.png" alt="20" class="lazyload"></p>
+<p>好吧，我还是没明白，再翻译一下：<code>在文件移动时报告它们的名称。</code></p>
+<p>？？？怎么报告？执行了命令之后，把执行的结果显示出来？</p>
+<p>像 <code>-n</code> 一样显示，但是会真的执行操作？</p>
+<p>试一下吧！</p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/21.png" alt="21" class="lazyload"></p>
+<p>好吧，果然是这样！</p>
+<p><strong>执行操作且输出执行结果！</strong></p>
+<p>看到这里呢，4 个参数也就全部看完了，继续下一部分吧！</p>
+<h2 id="呃。。。"><a href="#呃。。。" class="headerlink" title="呃。。。"></a>呃。。。</h2><p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/22.png" alt="22" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="https://sfcmn.github.io/images/git-mv/23.png" alt="23" class="lazyload"></p>
+<p>子模块？什么鬼哦？</p>
+<p>原谅我的无知，我第一次听到这个概念，好吧，那就先到这里吧，后面的部分，待我研究完子模块后再加上吧！</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总结一下呗，毕竟我写得很啰嗦😂😂😂</p>
+<ol>
+<li><p><strong>Usage</strong></p>
+<pre><code> usage: git mv [&lt;options&gt;] &lt;source&gt;... &lt;destination&gt;
+ # **移动或重命名一个文件或目录，或符号链接。**
+
+     -v, --verbose         be verbose  # **执行操作且输出执行结果！**
+     -n, --dry-run         dry run     # **什么也不做；仅显示将发生什么。**
+     -f, --force           force move/rename even if target exists
+                                                                             # **强制重命名或移动一个文件，即使目标存在！**
+     -k                    skip move/rename errors
+                                       # **-k 参数会在某个文件执行错误时跳过该文件，继续执行其他的文件！**</code></pre></li>
+<li><p><strong><code>git mv</code> 这条命令其实有两种用法</strong></p>
+<ul>
+<li><p><strong>move ，即移动文件或目录</strong></p>
+</li>
+<li><p><strong>rename ，即重命名文件或目录</strong></p>
+<p>  git mv [-v] [-f] [-n] [-k] &lt;源&gt; &lt;目标&gt;            # 移动或重命名<br>  git mv [-v] [-f] [-n] [-k] &lt;源&gt; … &lt;目标目录&gt;     # 移动</p>
+</li>
+</ul>
+</li>
+<li><p><strong>使用 <code>git mv</code> 命令后，所有的改动都会直接被 <code>add</code> 到暂存区中</strong></p>
+</li>
+<li><p><strong>git mv 的原理（猜测，不要全信）</strong></p>
+<p> <strong><code>git mv</code> 会先去检查参数个数</strong></p>
+<ul>
+<li><p>参数个数 &gt; 2 ，则说明是移动多个文件或目录到某一个指定的目录下</p>
+</li>
+<li><p>参数个数 =2 ，则说明操作的是单个文件或目录</p>
+<p>  操作单个文件或目录的情况下，</p>
+<ul>
+<li>如果是 文件 → 文件，那必然是重命名</li>
+<li>如果是文件 → 目录，那就是移动</li>
+<li>如果是 目录 → 目录，应该和 Shell 命令 mv是一致的，要看后一个目录后有没有跟 <code>/</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+  </article>
+
+  <div class="nexmoe-post-meta">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/Git/" rel="tag">Git</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>十甫寸木南<br>
+    <strong>Link：</strong><a href="https://sfcmn.github.io/2020/01/18/Git-%E8%AE%B0%E5%BD%95%EF%BC%9Amv/" title="https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;18&#x2F;Git-%E8%AE%B0%E5%BD%95%EF%BC%9Amv&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;18&#x2F;Git-%E8%AE%B0%E5%BD%95%EF%BC%9Amv&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'e6da0e58c0cd2888315f',
+        clientSecret: 'f587c3d7b4922bf0a1bc45cae20a6e1a1bb4c625',
+        id: window.location.pathname,
+        repo: 'SFCMN.github.io',
+        owner: 'SFCMN',
+        admin: 'SFCMN'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1583601944089"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+ 
+<script> 
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

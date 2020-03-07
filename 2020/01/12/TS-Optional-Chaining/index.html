@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+  
+  <title>TS-Optional-Chaining - 十甫寸木南</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="十甫寸木南的个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="2iXfn3_CkEXR1irll32gr3zuLZJKrSooFf2NXDGDMdo" />
+
+
+  <link rel="shortcut icon" href="/SFCMN-logo.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="TS-Optional-Chaining">
+<meta property="og:url" content="https://sfcmn.github.io/2020/01/12/TS-Optional-Chaining/index.html">
+<meta property="og:site_name" content="十甫寸木南">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-01-12T06:18:05.000Z">
+<meta property="article:modified_time" content="2020-03-07T17:07:27.452Z">
+<meta property="article:author" content="十甫寸木南">
+<meta property="article:tag" content="TypeScript">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583601944090">-->
+
+   
+    <style>
+      .nexmoe-avatar img:hover {
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+      }	
+    </style>
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(http://pic.netbian.com/uploads/allimg/190106/181813-15467698938ac9.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="十甫寸木南" class="mdui-btn mdui-btn-icon"><img src="/SFCMN-logo.png" alt="十甫寸木南"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="十甫寸木南">
+            <img src="/SFCMN-logo.png" alt="十甫寸木南" alt="十甫寸木南">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的收藏">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的收藏
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=site:sfcmn.github.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/sfcmn/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Tagcloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/%E5%BF%83%E8%B7%AF/" style="font-size: 10px;">心路</a> <a href="/tags/%E7%B2%BE%E7%AE%80/" style="font-size: 10px;">精简</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 十甫寸木南
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
+          <img data-src="http://pic.netbian.com/uploads/allimg/191215/000846-15763397267e73.jpg" data-sizes="auto" alt="TS-Optional-Chaining" class="lazyload">
+          <h1>TS-Optional-Chaining</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月12日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.7k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 12 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional-Chaining-的介绍"><span class="toc-number">1.</span> <span class="toc-text">Optional Chaining 的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#还有一个需要注意的点（上面忘说了😂）"><span class="toc-number">2.</span> <span class="toc-text">还有一个需要注意的点（上面忘说了😂）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#这里是个分隔线，真的没什么内容"><span class="toc-number">3.</span> <span class="toc-text">这里是个分隔线，真的没什么内容</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#上面的内容算是一个简单的介绍，继续往下看吧，骚年"><span class="toc-number">4.</span> <span class="toc-text">上面的内容算是一个简单的介绍，继续往下看吧，骚年</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Optional-Chaining-的好处"><span class="toc-number">5.</span> <span class="toc-text">Optional Chaining 的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#我再加一个需要注意的点（临时起意😂）"><span class="toc-number">6.</span> <span class="toc-text">我再加一个需要注意的点（临时起意😂）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下面呢，是-的几个用法"><span class="toc-number">7.</span> <span class="toc-text">下面呢，是 ?. 的几个用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#首先，第一个是可选属性访问"><span class="toc-number">7.1.</span> <span class="toc-text">首先，第一个是可选属性访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面是第二个用法：可选元素访问"><span class="toc-number">7.2.</span> <span class="toc-text">下面是第二个用法：可选元素访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再接着，是第三种用法：可选调用"><span class="toc-number">7.3.</span> <span class="toc-text">再接着，是第三种用法：可选调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下面这个呢，其实不算是用法，顶多算一个注意点"><span class="toc-number">7.4.</span> <span class="toc-text">下面这个呢，其实不算是用法，顶多算一个注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#好吧，再加一个注意点：Optional-Chaining-不会中断其他表达式"><span class="toc-number">8.</span> <span class="toc-text">好吧，再加一个注意点：Optional Chaining 不会中断其他表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#好，基本上就这么多，然后呢，这个功能是TS-3-7-版本后出来的"><span class="toc-number">9.</span> <span class="toc-text">好，基本上就这么多，然后呢，这个功能是TS 3.7 版本后出来的</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <!-- 以上为文章概述 -->
+<a id="more"></a>
+<!-- 以下为正文 -->
+
+<p>Created By: 十甫寸木南<br>Last Edited: Jan 12, 2020 2:14 PM</p>
+<p>这篇文章的由来呢，是当时在写一个 Story 的时候，因为一个 <code>any</code> 类型的 <code>object</code> ,由于无法直观地得出它是否是 <code>undefined</code> ,所以报了很多次错。于是，开启万能的 <strong>google</strong>,搜了一把，然后就得到了一个词：<em>Optional Chaining.</em></p>
+<p>于是乎，有了这篇文章。</p>
+<p>Of course,这篇文章并不是我最初的第一版，也是我经过一番修缮才放出来的。同时，这篇文章中的内容，是我结合 TS 的官方文档及网上的一些博客综合而来，然后加上我自己的一些理解及例程，最终完成的，如有理解错误之处，还望指出！</p>
+<p>下面，开始关于 <em>Optional Chaining</em> 的正文。</p>
+<h2 id="Optional-Chaining-的介绍"><a href="#Optional-Chaining-的介绍" class="headerlink" title="Optional Chaining 的介绍"></a>Optional Chaining 的介绍</h2><p><em>Optional Chaining</em> ,在代码中的使用形式呢，是这样的➡️ <strong><code>?.</code></strong></p>
+<p><strong><code>?.</code> 使我们可以在遇到 <code>null</code> 或 <code>undefined</code> 时立即停止运行某些表达式。</strong></p>
+<p>那么，怎么用呢？来看一个简单的例子：</p>
+<pre><code>const x = foo?.bar.baz();</code></pre><p>上面这行代码是什么意思呢？即：⬇️</p>
+<ul>
+<li>如果 <code>foo</code> 定义了，即不为 <code>null</code> 或 <code>undefined</code> 时，则继续执行 <code>const x = foo.bar.baz();</code></li>
+<li>如果 <code>foo</code> 为 <code>null</code> 或 <code>undefined</code> 时，返回 <code>undefined</code>,即执行 <code>const x = undefined;</code></li>
+</ul>
+<p>这么说我觉得已经是相当容易理解了吧！！！😊当然，如果将以上这段代码转换成比较熟悉的形式，可能会更容易理解一些！！！⬇️</p>
+<pre><code>const x = (foo !== null &amp;&amp; foo !== undefined) 
+    ? foo.bar.baz() 
+    : undefined;</code></pre><p>以上这段代码，我又再一次觉得，相当简单了！！！😁</p>
+<p>Of course,如果还是有不理解的👬，那么，我😶</p>
+<h2 id="还有一个需要注意的点（上面忘说了😂）"><a href="#还有一个需要注意的点（上面忘说了😂）" class="headerlink" title="还有一个需要注意的点（上面忘说了😂）"></a>还有一个需要注意的点（上面忘说了😂）</h2><p>需要注意的是：<br><strong><code>?.</code> 只能检查左侧的变量或属性。</strong></p>
+<p>如果以下这段代码这种的形式，则依旧会出错：</p>
+<pre><code>const foo = { ba: &quot;test&quot; };
+
+const x = foo?.bar.bar;</code></pre><p><strong><code>?.</code> 只检查了左侧的 <code>foo</code> ，并没有检查右侧的 <code>bar</code> 。</strong></p>
+<p>😂😂😂</p>
+<p>如果想要改成正确的形式，可以写成以下这种形式：</p>
+<pre><code>const x = foo?.bar?.bar;</code></pre><p>再次 Of Course，自我感觉这种好麻烦啊，如果我有一个 object ,它的属性及属性的属性及属性的属性的属性。。。都无法确定是不是 <code>undefined</code> ,我岂不是要写成这种：<code>const result = a?.b?.c?.d?.e?.f?.g;</code></p>
+<p>😂😂😂</p>
+<p>给官方跪了 Orz Orz Orz Orz …</p>
+<p>难道不能用一个声明作用的符号来声明这一整行都需要 Check 吗？或者，直接将这个功能内置成默认的！</p>
+<p>当然了，以上只是我个人的想法，毕竟天大地大官方最大😂而且，如果真的有人将代码写成 <code>a?.b?.c?.d?.e?.f?.g</code> 这种，我想说：👬，可以考虑换行了😂</p>
+<h2 id="这里是个分隔线，真的没什么内容"><a href="#这里是个分隔线，真的没什么内容" class="headerlink" title="这里是个分隔线，真的没什么内容"></a>这里是个分隔线，真的没什么内容</h2><hr>
+<hr>
+<hr>
+<hr>
+<p>我总感觉忘了啥，但是想不起来了😂</p>
+<hr>
+<hr>
+<h2 id="上面的内容算是一个简单的介绍，继续往下看吧，骚年"><a href="#上面的内容算是一个简单的介绍，继续往下看吧，骚年" class="headerlink" title="上面的内容算是一个简单的介绍，继续往下看吧，骚年"></a>上面的内容算是一个简单的介绍，继续往下看吧，骚年</h2><hr>
+<p>⬇️</p>
+<p>⬇️⬇️</p>
+<p>⬇️⬇️⬇️</p>
+<p>⬇️⬇️⬇️⬇️</p>
+<p>⬇️⬇️⬇️⬇️⬇️</p>
+<h2 id="Optional-Chaining-的好处"><a href="#Optional-Chaining-的好处" class="headerlink" title="Optional Chaining 的好处"></a>Optional Chaining 的好处</h2><p>好处呢，其实我觉得看了上面的内容后，对 <strong><code>?.</code></strong> 的好处应该已经知道个大概了。</p>
+<p>不过，毕竟做了笔记的，还是列出来吧！别嫌我啰嗦😂</p>
+<p>有一段代码，是用以前的(多久以前？我也不知道，反正就是 <code>?.</code> 没出的时候) TS 语法写的，是这样的：</p>
+<pre><code>if (foo &amp;&amp; foo.bar &amp;&amp; foo.bar.baz()) {
+    // ...
+}</code></pre><p>还有一段代码，是用现在的(我也不知道读者您们的阅读时间，总之就是 <code>?.</code> 出来了一段时间，但是也没多久，大概 <code>TS 3.7.4</code> 版本的时间)语法写的，是这样的：</p>
+<pre><code>if (foo?.bar?.baz()) {
+    // ...
+}</code></pre><p>比较完这两段代码，是不是一下就清晰明了了！</p>
+<p>是不是恍然大悟！</p>
+<p>是不是茅塞顿开！</p>
+<p>是不是立地成佛！</p>
+<p>好吧，就是变简单了！没之前那么长了！</p>
+<p>这里。。。</p>
+<h2 id="我再加一个需要注意的点（临时起意😂）"><a href="#我再加一个需要注意的点（临时起意😂）" class="headerlink" title="我再加一个需要注意的点（临时起意😂）"></a>我再加一个需要注意的点（临时起意😂）</h2><p>毕竟，有些东西得一点点引出来，对吧？😁</p>
+<p>那就是：</p>
+<p><strong><code>?.</code> 不同于 <code>&amp;&amp;</code></strong> </p>
+<p>可能直接这样写出来有些不太直观，那就先来看一个例子：</p>
+<pre><code>&quot;&quot; &amp;&amp; 1 // 0
+&quot;&quot;?.concat(&quot;hello&quot;) // &quot;hello&quot;</code></pre><p><strong><code>?.</code></strong> 判断的是是否为 <code>null</code> 或 <code>undefined</code></p>
+<p>而 <strong><code>&amp;&amp;</code></strong> 判断的是是否为 <code>flase</code></p>
+<p>感觉上，似乎还是有些莫名其妙哈😂，不过呢，能理解最好，不能理解也无所谓，反正这条不是很重要，基本上在写代码的过程中属于自然而然就懂的那种…</p>
+<h2 id="下面呢，是-的几个用法"><a href="#下面呢，是-的几个用法" class="headerlink" title="下面呢，是 ?. 的几个用法"></a>下面呢，是 <code>?.</code> 的几个用法</h2><h3 id="首先，第一个是可选属性访问"><a href="#首先，第一个是可选属性访问" class="headerlink" title="首先，第一个是可选属性访问"></a>首先，第一个是可选属性访问</h3><p><strong>可选属性访问</strong>是什么东西呢？就是说，<strong><code>?.</code></strong> 这个东西可以用来对 <code>object</code> 进行检查，检查什么呢？检查这个 <code>object</code> 是不是 <code>null</code> 或 <code>undefined</code> ，如果是 <code>null</code> 或 <code>undefined</code> ，那么就代表这个 <code>object</code> 的属性是不存在的；反之，如果这个<code>object</code> 不是 <code>null</code> 或 <code>undefined</code> ，那么就代表这个 <code>object</code> 的属性是可以取出来的。</p>
+<p>这个就是<strong>可选。</strong></p>
+<p>当然了，在上面的解释中呢，有一点需要注意，不知道有没有看出来的，而且在前面的部分中，我有提到过，那就是：</p>
+<p><strong><code>?.</code> 只检查左边的 <code>object</code></strong> ，也就是说，<code>foo?.bar</code> 这样的形式，如果 <code>foo</code> 为 <code>null</code> 或 <code>undefined</code> ,则 <code>foo?.bar</code> 在 <code>foo</code> 这里就直接返回了，根本不会走到 <code>.bar</code> 这一步；而如果 <code>foo</code> 不为 <code>null</code> 或 <code>undefined</code> ,则可以取 <code>foo.bar</code> 。</p>
+<p>当然了，还有一个需要注意的小点，如果 <code>foo</code> 不为空，但它没有 <code>bar</code> 这个属性，那么 <code>foo.bar</code> 取出来的值为 <code>undefined</code> 。</p>
+<p>好，言归正传，让我们来看一个例子，实际来看一下<strong>可选属性访问 的效果：</strong></p>
+<pre><code>// 第一种情况，person 存在
+const printCity  = (person?: any) =&gt; {
+    console.log(person?.name);
+};
+
+const person = {
+    name: &quot;Jack&quot;
+};
+printCity(person);
+
+// 执行 ts-node optionalPropertyAccesses.ts
+Jack
+
+// 第二种情况，person 不存在
+const printCity  = (person?: any) =&gt; {
+    console.log(person?.name);
+};
+
+printCity();
+
+// 执行 ts-node optionalPropertyAccesses.ts
+undefined</code></pre><p>以上两种情况呢，就是 <strong><code>?.</code></strong> 的效果了。</p>
+<p>当然，让大家看一下如果没有使用 <strong><code>?.</code></strong> 的情况：</p>
+<pre><code>// object 不存在，也没有使用 ‘?.’ ,直接报错
+
+const printCity  = (person?: any) =&gt; {
+    console.log(person.name);
+};
+
+printCity();
+
+// 执行 ts-node optionalPropertyAccesses.ts
+
+/Users/xxx/xxx/optionalChaining/optionalPropertyAccesses.ts:2
+    console.log(person.name);
+                       ^
+TypeError: Cannot read property &#39;name&#39; of undefined
+    at printCity (/Users/xxx/xxx/optionalChaining/optionalPropertyAccesses.ts:2:24)
+    at Object.&lt;anonymous&gt; (/Users/xxx/xxx/optionalChaining/optionalPropertyAccesses.ts:9:1)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:536:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:539:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)</code></pre><p>当然，下面我也把上面提到的小注意点列出来，看一下：</p>
+<pre><code>// object 存在，属性不存在，直接为 undefined
+
+const printCity  = (person?: any) =&gt; {
+    console.log(person.city);
+};
+
+const person = {
+    name: &quot;Jack&quot;
+};
+printCity(person);
+
+// 执行 ts-node optionalPropertyAccesses.ts
+undefined</code></pre><h3 id="下面是第二个用法：可选元素访问"><a href="#下面是第二个用法：可选元素访问" class="headerlink" title="下面是第二个用法：可选元素访问"></a>下面是第二个用法：可选元素访问</h3><p><strong>可选元素访问</strong>又是什么意思呢？</p>
+<p>就是<strong>可以用来从数组中取元素，即 <code>?.</code> 可以用来检查数组是否存在</strong>。</p>
+<p>话不多说，直接上示例代码吧：</p>
+<pre><code>// 第一种情况，数组存在
+
+const printFourthElement = (array?: string[]) =&gt; {
+    console.log(array?.[3]);
+};
+
+const array1 = [&quot;Jack&quot;, &quot;Tom&quot;, &quot;Bob&quot;, &quot;Jeny&quot;];
+printFourthElement(array1);
+
+// 执行 ts-node optionalElement.ts
+Jeny
+
+// 第二种情况，数组不存在
+
+const printFourthElement = (array?: string[]) =&gt; {
+    console.log(array?.[3]);
+};
+
+printFourthElement();
+
+// 执行 ts-node optionalElement.ts
+undefined</code></pre><p>还是一样，如果没有使用 <strong><code>?.</code></strong> ,则会报错：</p>
+<pre><code>// 数组不存在，没有使用 ‘?.’ ,直接报错
+
+const printFourthElement = (array?: string[]) =&gt; {
+    console.log(array[3]);
+};
+
+printFourthElement();
+
+// 执行 ts-node optionalElement.ts
+
+/Users/xxx/xxx/optionalChaining/optionalElement.ts:2
+    console.log(array[3]);
+                     ^
+TypeError: Cannot read property &#39;3&#39; of undefined
+    at printFourthElement (/Users/xxx/xxx/optionalChaining/optionalElement.ts:2:22)
+    at Object.&lt;anonymous&gt; (/Users/xxx/xxx/optionalChaining/optionalElement.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:536:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:539:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)</code></pre><h3 id="再接着，是第三种用法：可选调用"><a href="#再接着，是第三种用法：可选调用" class="headerlink" title="再接着，是第三种用法：可选调用"></a>再接着，是第三种用法：可选调用</h3><p>我相信，看了好多个🌰了，大家已经能猜出来<strong>可选调用</strong>是什么意思了。</p>
+<p>没错，就是<strong>方法的调用。</strong></p>
+<p>上吧，皮卡丘！</p>
+<pre><code>// 第一种情况，该方法（箭头函数...等）定义了
+
+const printMessage = (convert?: (message: string) =&gt; string) =&gt; {
+    console.log(convert?.(&quot;hello world&quot;));
+};
+const convert = (message: string): string =&gt; message.toUpperCase();
+
+printMessage(convert);
+
+// 执行 ts-node optionalCall.ts
+HELLO WORLD
+
+// 第二种情况，该方法（箭头函数...等）没有定义
+
+const printMessage = (convert?: (message: string) =&gt; string) =&gt; {
+    console.log(convert?.(&quot;hello world&quot;));
+};
+
+printMessage();
+
+// 执行 ts-node optionalCall.ts
+undefined
+
+// 没有使用 &#39;?.&#39; 的情况，直接报错
+
+const printMessage = (convert?: (message: string) =&gt; string) =&gt; {
+    console.log(convert(&quot;hello world&quot;));
+};
+
+printMessage();
+
+// 执行 ts-node optionalCall.ts
+
+/Users/xxx/xxx/optionalChaining/optionalCall.ts:2
+    console.log(convert(&quot;hello world&quot;));
+                ^
+TypeError: convert is not a function
+    at printMessage (/Users/xxx/xxx/optionalChaining/optionalCall.ts:2:17)
+    at Object.&lt;anonymous&gt; (/Users/xxx/xxx/optionalChaining/optionalCall.ts:7:1)
+    at Module._compile (internal/modules/cjs/loader.js:778:30)
+    at Module.m._compile (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:536:23)
+    at Module._extensions..js (internal/modules/cjs/loader.js:789:10)
+    at Object.require.extensions.(anonymous function) [as .ts] (/Users/xxx/xxx/node_modules/ts-node/src/index.ts:539:12)
+    at Module.load (internal/modules/cjs/loader.js:653:32)
+    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)
+    at Function.Module._load (internal/modules/cjs/loader.js:585:3)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:831:12)</code></pre><h3 id="下面这个呢，其实不算是用法，顶多算一个注意点"><a href="#下面这个呢，其实不算是用法，顶多算一个注意点" class="headerlink" title="下面这个呢，其实不算是用法，顶多算一个注意点"></a>下面这个呢，其实不算是用法，顶多算一个注意点</h3><h2 id="好吧，再加一个注意点：Optional-Chaining-不会中断其他表达式"><a href="#好吧，再加一个注意点：Optional-Chaining-不会中断其他表达式" class="headerlink" title="好吧，再加一个注意点：Optional Chaining 不会中断其他表达式"></a>好吧，再加一个注意点：<em>Optional Chaining</em> 不会中断其他表达式</h2><p>什么意思呢？就是说 <strong><code>?.</code> 值作用于可选属性访问、可选元素访问、可选调用。</strong></p>
+<p>如果 <code>?.</code> 使用在某一个表达式内，那这个表达式肯定是会被检查的；</p>
+<p>但另一个没有使用 <code>?.</code> 的表达式，是不会受这个表达式中 <code>?.</code> 的影响的。</p>
+<p>话不多说，来看代码：</p>
+<pre><code>const printFourthElement = (array?: string[]) =&gt; {
+    console.log(array?.[3].concat(&quot;, how are you?&quot;));
+    console.log(array?.[3] + &quot;, how are you?&quot;);
+};
+
+const array1 = [&quot;Jack&quot;, &quot;Tom&quot;, &quot;Bob&quot;, &quot;Jeny&quot;];
+
+printFourthElement(array1);
+printFourthElement();</code></pre><p>​    </p>
+<pre><code>// 执行结果----------------------
+
+Jeny, how are you?
+Jeny, how are you?
+undefined
+undefined, how are you?     // 重点看这个</code></pre><h2 id="好，基本上就这么多，然后呢，这个功能是TS-3-7-版本后出来的"><a href="#好，基本上就这么多，然后呢，这个功能是TS-3-7-版本后出来的" class="headerlink" title="好，基本上就这么多，然后呢，这个功能是TS 3.7 版本后出来的"></a>好，基本上就这么多，然后呢，这个功能是<code>TS 3.7</code> 版本后出来的</h2><p>如果要使用这个功能，请确保版本在 <code>3.7</code> 以上。</p>
+<p>有时会不起作用，那肯定是没配置好，不过，其实真的不需要配置什么，<code>package.json</code> 改个版本号就完了。😂</p>
+<p>或者原版本升下级，卸了重装？随便！实在不行，IDE 关了重启？</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/TypeScript/" rel="tag">TypeScript</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>十甫寸木南<br>
+    <strong>Link：</strong><a href="https://sfcmn.github.io/2020/01/12/TS-Optional-Chaining/" title="https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;12&#x2F;TS-Optional-Chaining&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;12&#x2F;TS-Optional-Chaining&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'e6da0e58c0cd2888315f',
+        clientSecret: 'f587c3d7b4922bf0a1bc45cae20a6e1a1bb4c625',
+        id: window.location.pathname,
+        repo: 'SFCMN.github.io',
+        owner: 'SFCMN',
+        admin: 'SFCMN'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1583601944091"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+ 
+<script> 
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>

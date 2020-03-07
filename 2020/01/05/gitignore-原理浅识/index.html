@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+  
+  <title>gitignore 原理浅识 - 十甫寸木南</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="十甫寸木南的个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="2iXfn3_CkEXR1irll32gr3zuLZJKrSooFf2NXDGDMdo" />
+
+
+  <link rel="shortcut icon" href="/SFCMN-logo.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="gitignore 原理浅识">
+<meta property="og:url" content="https://sfcmn.github.io/2020/01/05/gitignore-%E5%8E%9F%E7%90%86%E6%B5%85%E8%AF%86/index.html">
+<meta property="og:site_name" content="十甫寸木南">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2020-01-05T03:00:25.000Z">
+<meta property="article:modified_time" content="2020-03-07T17:07:27.453Z">
+<meta property="article:author" content="十甫寸木南">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583601944091">-->
+
+   
+    <style>
+      .nexmoe-avatar img:hover {
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+      }	
+    </style>
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(http://pic.netbian.com/uploads/allimg/190106/181813-15467698938ac9.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="十甫寸木南" class="mdui-btn mdui-btn-icon"><img src="/SFCMN-logo.png" alt="十甫寸木南"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="十甫寸木南">
+            <img src="/SFCMN-logo.png" alt="十甫寸木南" alt="十甫寸木南">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>5</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的收藏">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的收藏
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=site:sfcmn.github.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/sfcmn/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Tagcloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/%E5%BF%83%E8%B7%AF/" style="font-size: 10px;">心路</a> <a href="/tags/%E7%B2%BE%E7%AE%80/" style="font-size: 10px;">精简</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 十甫寸木南
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: NaN%;"> 
+          <img data-src="http://pic.netbian.com/uploads/allimg/191115/233650-15738322106227.jpg" data-sizes="auto" alt="gitignore 原理浅识" class="lazyload">
+          <h1>gitignore 原理浅识</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年01月05日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 9 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、学习-gitignore-的起因"><span class="toc-number">1.</span> <span class="toc-text">1、学习 gitignore 的起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、我原本对-gitignore-的理解"><span class="toc-number">2.</span> <span class="toc-text">2、我原本对 .gitignore 的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、gitignore-介绍"><span class="toc-number">3.</span> <span class="toc-text">3、gitignore 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、gitignore-描述"><span class="toc-number">4.</span> <span class="toc-text">4、gitignore 描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、gitignore-的语法规则"><span class="toc-number">5.</span> <span class="toc-text">5、gitignore 的语法规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、停止被-Git-追踪-Track"><span class="toc-number">6.</span> <span class="toc-text">6、停止被 Git 追踪(Track)</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <!-- 以上为文章概述 -->
+<a id="more"></a>
+<!-- 以下为正文 -->
+
+<p>Created By: 十甫寸木南<br>Last Edited: Jan 05, 2020 10:56 AM</p>
+<h2 id="1、学习-gitignore-的起因"><a href="#1、学习-gitignore-的起因" class="headerlink" title="1、学习 gitignore 的起因"></a>1、学习 gitignore 的起因</h2><p>在项目过程中，由于需要忽略某一个文件，所以新建了一个 <code>.gitignore</code> 文件。但是，与我想象的有些不太一样，和我 Pair 的小伙伴直接将 <code>.gitignore</code> 文件建在了当前目录下。结构大致如下：</p>
+<pre><code>    .
+    ├── Dockerfile
+    ├── Gemfile
+    ├── README.md
+    ├── auto
+    │   ├── dev-environment
+    │   └── rubocop
+    ├── docker-compose.yml
+    ├── template
+    │   ├── README.md
+    │   └── auto
+    │       ├── kite
+    |       └── .gitignore
+    ├── version.txt
+    └── .gitignore</code></pre><p>What?<br>这样可以吗？不是需要在根目录下创建的吗？难道我的理解有问题？<br>于是，我来学 <code>gitignore</code> 了！😂</p>
+<h2 id="2、我原本对-gitignore-的理解"><a href="#2、我原本对-gitignore-的理解" class="headerlink" title="2、我原本对 .gitignore 的理解"></a>2、我原本对 .gitignore 的理解</h2><p>我自己学习过 <strong>Git</strong> ,也一直在用 <strong>Git</strong> ，而 <code>.gitignore</code> 用于忽略某些文件，使其不被 <strong>Git</strong> 追踪，这个作用我是知道的。<br>当然，我一直以来的理解是：</p>
+<ul>
+<li><code>.gitignore</code> 文件需要在项目根目录下</li>
+<li><code>.gitignore</code> 只对当前项目起作用</li>
+<li><code>.gitignore</code> 文件中可以有一些简单的匹配规则</li>
+</ul>
+<h2 id="3、gitignore-介绍"><a href="#3、gitignore-介绍" class="headerlink" title="3、gitignore 介绍"></a>3、gitignore 介绍</h2><ul>
+<li><p><strong><code>gitignore</code> 的定义</strong><br>对于 <code>gitignore</code> 的定义，我在<a href="https://git-scm.com/docs/gitignore" target="_blank" rel="noopener">官网</a>上找到的解释是这样的：<em>Specifies intentionally untracked files to ignore.</em> 而翻译成中文，大意是：<strong>故意指定不追踪的文件，以达到忽略的目的。</strong><br>同时，我还在一篇<a href="https://juejin.im/post/5a7815e05188257a74509216" target="_blank" rel="noopener">文章</a>中找到了一个比较浅显易懂的解释：<strong><code>.gitignore</code> ,是用来显式指定哪些文件或文件夹应该被Git忽略的一个文件。</strong><br>这个解释就相当得好懂了，而根据这两个定义（解释）以及我自己之前对 <code>.gitignore</code> 的理解，很明显，<strong><code>.gitignore</code> 就是用来指定需要被 Git 忽略的文件或文件夹的，以达到其不被 Git 追踪的目的，从而，在整个版本控制的生命周期中，Git 不会对在 <code>.gitignore</code> 中指定的文件和文件夹进行版本管理。</strong><br>同时，经常使用 <code>.gitignore</code> 的一个场景是：<strong>为了在提交代码时不将某些没有意义的文件或文件夹提交到远端仓库</strong>，比如：VS Code 生成的 .<code>vscode</code> 目录、IDEA 生成的 <code>.idea</code> 目录、Node 项目中的 <code>node_modules</code> 目录等。</p>
+</li>
+<li><p><strong><code>gitignore</code> 的有效位置</strong><br><code>$HOME/.gitignore_global</code> , <code>$HOME/.config/git/ignore</code> , <code>$GIT_DIR/info/exclude</code> , <code>.gitignore</code> 这些地方指定的 <strong>ignore</strong> 规则都会在 <strong>Git</strong> 仓库中生效。</p>
+</li>
+</ul>
+<h2 id="4、gitignore-描述"><a href="#4、gitignore-描述" class="headerlink" title="4、gitignore 描述"></a>4、gitignore 描述</h2><p><strong><code>gitignore</code> 指定应该被 Git 忽略的文件或目录</strong>；同时，在 <code>gitignore</code> 文件中，<strong>每一行都指定了一种匹配模式（规则），指定了匹配到的文件或目录应该被 Git 忽略</strong>；但，有一点需要注意，即<strong>已经被 Git 追踪的文件或目录不受 <code>gitignore</code> 文件的影响。</strong><br>这是已经在上面解释过的关于 <code>gitignore</code> 的定义，但是，可以注意到，在上面有写到 <code>gitignore</code> 的有效位置有多个，包括 <code>$HOME/.gitignore_global</code> , <code>$HOME/.config/git/ignore</code> , <code>$GIT_DIR/info/exclude</code> , <code>.gitignore</code> 等。那么，这么多的 <code>gitignore</code> ，如果他们都指定了应该被忽略的文件或目录，那他们的顺序是怎样的呢？<br>这就不得不提到 <strong>Git</strong> 对 <code>gitignore</code> 的优先检查顺序！<br>以下，是按照<strong>从高到低的优先级顺序列出的各个 .gitignore 的有效位置（规则源）</strong>：</p>
+<ul>
+<li><p><strong>从命令行输入的 <code>gitignore</code> 规则</strong></p>
+</li>
+<li><p><strong>项目中的 <code>gitignore</code> 规则</strong>：其中，当前目录下的 <code>gitignore</code> 规则优先级最高，紧接着是父目录中的 <code>gitignore</code> 规则……最后，是项目根目录下的 <code>gitignore</code> 规则。总之，<strong>越靠近指定忽略文件或目录的 <code>gitignore</code> 规则，优先级越高</strong>。</p>
+</li>
+<li><p><strong><code>$GIT_DIR/info/exclude</code> 位置的 <code>gitignore</code> 规则</strong>。🤔️<code>$GIT_DIR</code> 是什么？<a href="https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables" target="_blank" rel="noopener">官网</a>给出的定义是：<a href="https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables" target="_blank" rel="noopener">$GIT_DIR</a> <strong>是 <code>.git</code> 文件夹的位置。如果未指定，则 Git 会沿目录树移动，在每个位置查找 <code>.git</code> 文件夹，直至到达 <code>~</code> 或 <code>/</code> 。</strong></p>
+</li>
+<li><p><strong>Git 配置的变量 <code>core.excludeFile</code> 指定的规则</strong>。🤔️变量 <code>[core.excludeFile](https://stackoverflow.com/questions/7335420/global-git-ignore)</code> 是什么？怎么用？<strong><code>git config --global core.excludesfile &#39;~/.gitignore&#39;</code> 指定一个 <code>.gitignore</code> 文件，作为全局的配置</strong></p>
+</li>
+<li><p>🤔️那 <code>$HOME/.gitignore_global</code> , <code>$HOME/.config/git/ignore</code> 呢？<br>经过查找<a href="https://digitalfortress.tech/tricks/creating-a-global-gitignore/" target="_blank" rel="noopener">资料</a>发现，原来 <strong><code>[$HOME/.gitignore_global](https://digitalfortress.tech/tricks/creating-a-global-gitignore/)</code> 就是用来配置到变量 <code>core.excludeFile</code> 的</strong>，而这个文件名其实完全可以随便起，只是为了更加语义化一些，所以将其命名为 <code>.gitignore_global</code> 。<br>那，这只是一个，另一个 <code>$HOME/.config/git/ignore</code> 呢？原来，上面的 <code>core.excludeFile</code> 是通过设置全局 <code>gitignore</code> 的形式使用了 <code>$HOME/.gitignore_global</code> ,但是，这种方法是需要我们自己手动去配置的！然而，<strong>Git 是有<a href="https://stackoverflow.com/questions/7335420/global-git-ignore" target="_blank" rel="noopener">默认的全局 <code>gitignore</code> 的位置</a>的！即，<code>$XDG_CONFIG_HOME/git/ignore</code> ，但是，如果 <code>$XDG_CONFIG_HOME</code> 没有设置或为空的话，则使用 <code>$HOME/.config/git/ignore</code></strong> ！当然，如果 <code>$HOME/.config/git/ignore</code> 也没有设置，那还用个🍺呦！😂</p>
+</li>
+</ul>
+<p>那么，<code>gitignore</code> 有这么多的有效位置，我们在平时使用的时候，到底<strong>应该将我们的 <code>gitignore</code> 规则放置在什么位置</strong>呢？<br>官网给出了几个建议：</p>
+<ul>
+<li><p>如果在一个项目中，需要 <strong>Git</strong> 忽略掉一些文件或目录，不对它们进行追踪，并且要保证其他人 <strong><code>clone</code> 下该项目后，<code>gitignore</code> 规则依旧生效</strong>，则应该<strong>将 <code>.gitignore</code> 文件定义在项目中</strong>。</p>
+</li>
+<li><p>如果某个规则<strong>只想在某一个特定的仓库中生效，就把它定义在 <code>$GIT_DIR/info/exclude</code> 中</strong>。</p>
+</li>
+<li><p>如果<strong>你的<code>gitignore</code>规则要在任何情况下都生效，这种规则最好放在<code>core.excludesFile</code>这一变量中</strong>，<strong>这个变量定义在用户目录下-<code>~/.gitconfig</code>，该变量的默认值是<code>$XDG_CONFIG_HOME/git/ignore</code>，如果<code>$XDG_CONFIG_HOME</code>未设置或为空，Git会使用<code>$HOME/.config/git/ignore</code></strong></p>
+</li>
+</ul>
+<p>以上就是一些大致的建议。同时，关于 <code>gitignore</code> 规则，还有一个需要注意的点，即：</p>
+<ul>
+<li><p><strong>Git 的底层管道工具，比如 <code>git ls-files</code> 和 <code>git read-tree</code>，只从命令行参数指定的文件中读取 <code>gitignore</code> 规则</strong>。</p>
+</li>
+<li><p><strong>上层的 Git 工具，比如 <code>git status</code> 和 <code>git add</code>，会从上述规则源中读取 <code>gitignore</code> 规则</strong></p>
+</li>
+</ul>
+<h2 id="5、gitignore-的语法规则"><a href="#5、gitignore-的语法规则" class="headerlink" title="5、gitignore 的语法规则"></a>5、gitignore 的语法规则</h2><ul>
+<li><strong>空行不匹配任何文件</strong>，可以用空行来增强 <code>gitignore</code> 规则的可读性😂</li>
+<li><strong>注释行以 <code>#</code> 开头</strong></li>
+<li>如果指定要忽略的文件或目录名中含 <code>#</code> 的话，<strong>可以在 <code>#</code> 前加反斜杠 <code>\</code></strong> ，即 <code>\#</code></li>
+<li>如果每一行最后尾随的空格没有用反斜杠转义，那么这些空格是无效的，不会作为规则的一部分</li>
+<li><strong>使用 <code>!</code> 前缀来否定 <code>gitignore</code> 规则中前面部分忽略掉的文件或目录</strong>。如果一个文件被前面的 <code>gitignore</code> 规则给匹配到了，那么该文件不会被Git追踪，但是如果后面的规则使用<code>!</code>匹配到了该文件，那么该文件又会被Git追踪。</li>
+<li><strong>如果一个目录被 Git 忽略了，那么无论如何，即便在后面部分指定了应该否定该目录下的某个文件，这个文件也不会被Git追踪</strong>。这是由于：<strong>出于性能考虑，Git不会遍历被忽略的目录</strong>，因此，定义在被忽略目录下的 <code>gitignore</code> 规则都是无效的。</li>
+<li>如果某个文件或目录以感叹号 <code>!</code> 开头，如果要指定忽略该文件或目录的话，可以<strong>在 <code>!</code> 前面加上反斜杠 <code>\</code> ,即 <code>\!</code></strong> 。比如：<code>\!important.txt</code>会匹配文件<code>!important.txt</code></li>
+<li><strong>以斜杠 <code>/</code> 结尾代表指定的是某个目录及该目录下的所有子目录及文件</strong></li>
+<li>如果<strong>不是以斜杠 <code>/</code> 结尾，则代表指定的是某个文件</strong></li>
+<li>如果规则不符合以上的情况，那么 <strong>Git</strong> 就会把这个规则当成 <code>shell</code> 通配符规则来进行解析。举个🌰，<code>Documentation/*.html</code> 匹配 <code>Documentation/git.html</code>，但不会匹配<code>Documentation/ppc/ppc.html</code> 或者 <code>tools/perf/Documentation/perf.html</code></li>
+<li><strong>以斜杠开头的通配符规则从路径开头开始匹配</strong>。比如，<code>/*.c</code> 匹配 <code>cat-file.c</code>，但不匹配<code>mozilla-sha1/sha1.c</code></li>
+<li><code>**</code> <strong>代表可以匹配到 0+ 个目录</strong>，比如：<ul>
+<li><code>**/foo</code> 会匹配到所有路径下的文件 <code>foo</code> 或者目录 <code>foo</code>，无论它在哪个目录</li>
+<li><code>**/foo/bar</code> 规则会匹配到所有路径下的目录 <code>foo</code> 下直接跟的文件<code>bar</code>或目录<code>bar</code></li>
+<li><code>abc/**</code> 会匹配目录 <code>abc</code> 下的所有文件及子目录…</li>
+<li><code>a/**/b</code> 会匹配 <code>a/b</code>、<code>a/x/b</code>、<code>a/x/y/b</code> 等，中间的目录级数可以是 0+ 个</li>
+</ul>
+</li>
+</ul>
+<h2 id="6、停止被-Git-追踪-Track"><a href="#6、停止被-Git-追踪-Track" class="headerlink" title="6、停止被 Git 追踪(Track)"></a>6、停止被 Git 追踪(Track)</h2><p><code>gitignore</code> 文件的目的是<strong>确保某些不应该被Git追踪的文件确实没有被 track</strong>。<br>如果<strong>要停止追踪(track)一个已经被Git追踪的文件，请使用 <code>git rm --cached Xxx</code> 命令</strong>。</p>
+
+  </article>
+
+  <div class="nexmoe-post-meta">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/Git/" rel="tag">Git</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>十甫寸木南<br>
+    <strong>Link：</strong><a href="https://sfcmn.github.io/2020/01/05/gitignore-%E5%8E%9F%E7%90%86%E6%B5%85%E8%AF%86/" title="https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;05&#x2F;gitignore-%E5%8E%9F%E7%90%86%E6%B5%85%E8%AF%86&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;01&#x2F;05&#x2F;gitignore-%E5%8E%9F%E7%90%86%E6%B5%85%E8%AF%86&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'e6da0e58c0cd2888315f',
+        clientSecret: 'f587c3d7b4922bf0a1bc45cae20a6e1a1bb4c625',
+        id: window.location.pathname,
+        repo: 'SFCMN.github.io',
+        owner: 'SFCMN',
+        admin: 'SFCMN'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1583601944092"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+ 
+<script> 
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
