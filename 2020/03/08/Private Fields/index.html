@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+<head>
+  
+  <title>TS-Private-Fields - 十甫寸木南</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="十甫寸木南的个人博客">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+    <!-- Site Verification -->
+    <meta name="google-site-verification" content="2iXfn3_CkEXR1irll32gr3zuLZJKrSooFf2NXDGDMdo" />
+
+
+  <link rel="shortcut icon" href="/SFCMN-logo.png" type="image/png" />
+  <meta property="og:type" content="article">
+<meta property="og:title" content="TS-Private-Fields">
+<meta property="og:url" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/index.html">
+<meta property="og:site_name" content="十甫寸木南">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%201.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%202.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%203.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%204.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%206.png">
+<meta property="article:published_time" content="2020-03-08T15:16:05.000Z">
+<meta property="article:modified_time" content="2020-03-08T15:20:42.868Z">
+<meta property="article:author" content="十甫寸木南">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="精简">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583680852153">-->
+
+   
+    <style>
+      .nexmoe-avatar img:hover {
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+      }	
+    </style>
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="opacity: .9; filter: blur(2px); background-image: url(http://pic.netbian.com/uploads/allimg/190106/181813-15467698938ac9.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="十甫寸木南" class="mdui-btn mdui-btn-icon"><img src="/SFCMN-logo.png" alt="十甫寸木南"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="十甫寸木南">
+            <img src="/SFCMN-logo.png" alt="十甫寸木南" alt="十甫寸木南">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>6</div>
+        <div><span>Tags</span>4</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的收藏">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的收藏
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap" style="background-color: rgba(255, 255, 255, .2)">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://www.google.com/search?q=site:sfcmn.github.io" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap" style="background-color: rgba(255, 255, 255, .2)">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://github.com/sfcmn/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap" style="background-color: rgba(255, 255, 255, .2)">
+    <h3 class="nexmoe-widget-title">Tagcloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud">
+      <a href="/tags/Git/" style="font-size: 15px;">Git</a> <a href="/tags/TypeScript/" style="font-size: 20px;">TypeScript</a> <a href="/tags/%E5%BF%83%E8%B7%AF/" style="font-size: 10px;">心路</a> <a href="/tags/%E7%B2%BE%E7%AE%80/" style="font-size: 15px;">精简</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 十甫寸木南
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary" style="background-color: rgba(0, 0, 0, 0)">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 54.59183673469388%;"> 
+          <img data-src="http://pic.netbian.com/uploads/allimg/190222/200204-1550836924b60c.jpg" data-sizes="auto" alt="TS-Private-Fields" class="lazyload">
+          <h1>TS-Private-Fields</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年03月08日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#文章-PDF-版"><span class="toc-number">1.</span> <span class="toc-text">文章 PDF 版</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#官网说明"><span class="toc-number">2.</span> <span class="toc-text">官网说明</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">3.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#私有字段的用法"><span class="toc-number">4.</span> <span class="toc-text">私有字段的用法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#私有字段的尝试"><span class="toc-number">5.</span> <span class="toc-text">私有字段的尝试</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#私有字段和-private-修饰符的区别"><span class="toc-number">6.</span> <span class="toc-text">私有字段和 private 修饰符的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#私有字段的支持"><span class="toc-number">7.</span> <span class="toc-text">私有字段的支持</span></a></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <!-- 以上为文章概述 -->
+<a id="more"></a>
+<!-- 以下为正文 -->
+
+<p>Created: Mar 08, 2020 3:47 PM<br>Tags: ECMAScript, Learning, TypeScript, 程序员生涯</p>
+<h1 id="文章-PDF-版"><a href="#文章-PDF-版" class="headerlink" title="文章 PDF 版"></a><a href="https://sfcmn.github.io/pdf/TypeScript/TS_Private_Fields.pdf">文章 PDF 版</a></h1><h1 id="官网说明"><a href="#官网说明" class="headerlink" title="官网说明"></a>官网说明</h1><p><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#ecmascript-private-fields" target="_blank" rel="noopener">Handbook - TypeScript 3.8</a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>对<strong>私有字段</strong>的支持是从 <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html" target="_blank" rel="noopener">TypeScript 3.8</a> 开始的。(<strong>私有字段</strong>目前在 EcmaScript 中尚处于 <a href="https://github.com/tc39/proposal-class-fields/" target="_blank" rel="noopener">stage-3</a> )</p>
+<p><strong>私有字段以 <code>#</code> 开始</strong>，如下：</p>
+<pre><code>class Person {
+    #name: string
+
+    constructor(name: string) {
+        this.#name = name;
+    }
+
+    greet() {
+        console.log(`Hello, my name is ${this.#name}!`);
+    }
+}
+
+let jeremy = new Person(&quot;Jeremy Bearimy&quot;);
+
+jeremy.#name
+//     ~~~~~
+// Property &#39;#name&#39; is not accessible outside class &#39;Person&#39;
+// because it has a private identifier.</code></pre><h1 id="私有字段的用法"><a href="#私有字段的用法" class="headerlink" title="私有字段的用法"></a>私有字段的用法</h1><p>私有字段的使用规则：</p>
+<ul>
+<li><strong>私有字段以 <code>#</code> 开始。</strong></li>
+<li><strong>每个私有字段的名字，在被包含的类中，都是唯一的。</strong></li>
+<li><strong>TypeScript 辅助功能修饰符(public、private 等)不能在私有字段上使用。</strong></li>
+<li><strong>私有字段不能在所包含的类之外访问；即使是对于 JavaScript 使用者来说也是如此。</strong></li>
+</ul>
+<p>针对以上规则的第 2 条 “<strong>每个私有字段的名字，在被包含的类中，都是唯一的。”</strong>，有以下示例对其做出解释：</p>
+<ul>
+<li><p>常规属性声明容易在子类中被改写，<strong>私有字段不会被子类改写，每个私有字段，在所包含的类中，都是唯一的。</strong></p>
+<p>  // 常规属性声明<br>  class C {</p>
+<pre><code>foo = 10;
+
+cHelper() {
+  return this.foo;
+}</code></pre><p>  }</p>
+<p>  class D extends C {</p>
+<pre><code>foo = 20;
+
+dHelper() {
+  return this.foo;
+}</code></pre><p>  }</p>
+<p>  let instance = new D();<br>  // ‘this.foo’ refers to the same property on each instance.<br>  console.log(instance.cHelper()); // prints ‘20’<br>  console.log(instance.dHelper()); // prints ‘20’</p>
+<p>  // 私有字段声明<br>  class C {</p>
+<pre><code>  #foo = 10;
+
+  cHelper() {
+      return this.#foo;
+  }</code></pre><p>  }</p>
+<p>  class D extends C {</p>
+<pre><code>  #foo = 20;
+
+  dHelper() {
+      return this.#foo;
+  }</code></pre><p>  }</p>
+<p>  let instance = new D();<br>  // ‘this.#foo’ refers to a different field within each class.<br>  console.log(instance.cHelper()); // prints ‘10’<br>  console.log(instance.dHelper()); // prints ‘20’</p>
+</li>
+</ul>
+<p>对于<strong>私有字段</strong>的使用，还需要注意的一点是：<strong>除非在某个对象的类型声明中声明了某个私有字段，否则，在未声明该私有字段的对象中无法使用该私有字段，会报错。</strong></p>
+<pre><code>class Square {
+    #sideLength: number;
+
+    constructor(sideLength: number) {
+        this.#sideLength = sideLength;
+    }
+
+    equals(other: any) {
+        return this.#sideLength === other.#sideLength;
+    }
+}
+
+const a = new Square(100);
+const b = { sideLength: 100 };
+
+// Boom!
+// TypeError: attempted to get private field on non-instance
+// This fails because &#39;b&#39; is not an instance of &#39;Square&#39;.
+console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#私有字段的尝试" class="headerlink" title="私有字段的尝试"></a>私有字段的尝试</h1><p>在看过对<strong>私有字段</strong>的概述及用法介绍后，我实际尝试了一番，但却碰到了一些问题，具体如下：</p>
+<ul>
+<li><p>示例代码：</p>
+<pre><code>  // private-field.ts
+  class Person {
+      #name: string;
+
+      constructor(name: string) {
+          this.#name = name;
+      }
+
+      greet() {
+          console.log(`Hello, my name is ${this.#name}!`);
+      }
+  }
+
+  const jeremy = new Person(&quot;Jeremy Bearimy&quot;);
+
+  jeremy.greet();</code></pre><p>  以上示例代码完全是从官网 Copy 下来的，但是在 IDE 中却显示出错！</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled.png" alt="Private%20Fields/Untitled.png" class="lazyload"></p>
+<p>  这是怎么回事呢？</p>
+</li>
+<li><p>看一下报错信息：</p>
+<pre><code>  // TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+  // Private 标识符仅在 ECMAScript 2015 及更高版本可用</code></pre><p>  原来如此！我当前的版本不支持私有字段！</p>
+<p>  但是不对啊，我的 TypeScript 版本就是 3.8 啊！</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%201.png" alt="Private%20Fields/Untitled%201.png" class="lazyload"></p>
+<p>  那是怎么回事呢？在 <a href="https://stackoverflow.com/questions/41010780/accessors-are-only-available-when-targeting-ecmascript-5-and-higher" target="_blank" rel="noopener">stackoverflow 的一个提问</a>中我找到了原因：我的 <code>**tsconfig.json</code> 配置错了**！</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%202.png" alt="Private%20Fields/Untitled%202.png" class="lazyload"></p>
+<p>  我的编译目标版本错了，是 <code>es5</code> ，而报错信息已经明确提示了，要求的版本是 <strong>ES 2015 及以上</strong>。</p>
+</li>
+<li><p>解决方案</p>
+<p>  找到了问题所在，那么，解决起来就很简单了！</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%203.png" alt="Private%20Fields/Untitled%203.png" class="lazyload"></p>
+<p>  可以看到，在将编译目标版本改到 <code>es2015</code> 后，原本 <code>private-field.ts</code> 上的出错提示已经消失了。</p>
+</li>
+<li><p>运行效果</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%204.png" alt="Private%20Fields/Untitled%204.png" class="lazyload"></p>
+</li>
+<li><p>私有字段的效果</p>
+<p>  示例已经顺利运行起来了，那么，到底这个<strong>私有字段</strong>有没有用呢？</p>
+<p>  在之前的示例代码中加上一行：</p>
+<pre><code>  class Person {
+      #name: string;
+
+      constructor(name: string) {
+          this.#name = name;
+      }
+
+      greet() {
+          console.log(`Hello, my name is ${this.#name}!`);
+      }
+  }
+
+  const jeremy = new Person(&quot;Jeremy Bearimy&quot;);
+
+  jeremy.greet();</code></pre></li>
+</ul>
+<pre><code>    console.log(jeremy.#name);
+    //                 ~~~~~
+    // TS18013: Property &#39;#name&#39; is not accessible outside class &#39;Person&#39; because it has a private identifier.
+
+报错了！
+
+![Private%20Fields/Untitled%205.png](Private%20Fields/Untitled%205.png)
+
+果然，**私有字段**还是非常犀利的！😊😊😊</code></pre><h1 id="私有字段和-private-修饰符的区别"><a href="#私有字段和-private-修饰符的区别" class="headerlink" title="私有字段和 private 修饰符的区别"></a>私有字段和 private 修饰符的区别</h1><ul>
+<li>TypeScript 中的 private 修饰符在编译为 JavaScript 后就完全被删掉了，相当于实际上是没有用的。</li>
+<li>私有字段即便编译为 JavaScript 也会存在。</li>
+</ul>
+<h1 id="私有字段的支持"><a href="#私有字段的支持" class="headerlink" title="私有字段的支持"></a>私有字段的支持</h1><p>由于目前 ECMAScript 对<strong>私有字段</strong>的支持尚在 <a href="https://github.com/tc39/proposal-class-fields/" target="_blank" rel="noopener">stage-3</a> ，虽然可以用 <a href="https://babeljs.io/docs/en/babel-plugin-proposal-class-properties" target="_blank" rel="noopener">Babel</a> 实现在 JavaScript 中使用<strong>私有字段</strong>，但是不使用插件的话，将 TypeScript 编译为 JavaScript 会报错。</p>
+<p>当然，也有可能是可以编译成功的，但是我目前由于没有深入地研究，所以暂时还没有实验成功。</p>
+<p><img data-sizes="auto" data-src="Private%20Fields/Untitled%206.png" alt="Private%20Fields/Untitled%206.png" class="lazyload"></p>
+
+  </article>
+
+  <div class="nexmoe-post-meta">
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/TypeScript/" rel="tag">TypeScript</a> <a class="nexmoefont icon-tag-fill -link" href="/tags/%E7%B2%BE%E7%AE%80/" rel="tag">精简</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer" style="background-color: rgba(255, 255, 255, 0)">
+    
+      
+  <div class="nexmoe-post-copyright" style="background-color: rgba(255, 255, 255, 0)">
+    <strong>Author：</strong>十甫寸木南<br>
+    <strong>Link：</strong><a href="https://sfcmn.github.io/2020/03/08/Private%20Fields/" title="https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;03&#x2F;08&#x2F;Private%20Fields&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;sfcmn.github.io&#x2F;2020&#x2F;03&#x2F;08&#x2F;Private%20Fields&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: 'e6da0e58c0cd2888315f',
+        clientSecret: 'f587c3d7b4922bf0a1bc45cae20a6e1a1bb4c625',
+        id: window.location.pathname,
+        repo: 'SFCMN.github.io',
+        owner: 'SFCMN',
+        admin: 'SFCMN'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<!--<script src="/js/app.js?v=1583680852154"></script>-->
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+ 
+<script> 
+!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
