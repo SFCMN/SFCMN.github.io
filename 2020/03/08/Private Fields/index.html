@@ -21,13 +21,14 @@
 <meta property="og:site_name" content="十甫寸木南">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled.png">
-<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%201.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/images/Private%20Fields/Untitled%201.png">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%202.png">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%203.png">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%204.png">
+<meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%205.png">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%206.png">
 <meta property="article:published_time" content="2020-03-08T15:16:05.000Z">
-<meta property="article:modified_time" content="2020-03-08T15:34:41.470Z">
+<meta property="article:modified_time" content="2020-03-08T15:40:30.627Z">
 <meta property="article:author" content="十甫寸木南">
 <meta property="article:tag" content="TypeScript">
 <meta property="article:tag" content="精简">
@@ -35,7 +36,7 @@
 <meta name="twitter:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1583681698421">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583682034226">-->
 
    
     <style>
@@ -292,8 +293,8 @@ console.log(a.equals(b));
   // Private 标识符仅在 ECMAScript 2015 及更高版本可用</code></pre>
 <p>  原来如此！我当前的版本不支持私有字段！</p>
 <p>  但是不对啊，我的 TypeScript 版本就是 3.8 啊！</p>
-<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%201.png" alt="Private%20Fields/Untitled%201.png" class="lazyload"></p>
-<p>  那是怎么回事呢？在 <a href="https://stackoverflow.com/questions/41010780/accessors-are-only-available-when-targeting-ecmascript-5-and-higher" target="_blank" rel="noopener">stackoverflow 的一个提问</a>中我找到了原因：我的 <code>**tsconfig.json</code> 配置错了**！</p>
+<p>  <img data-sizes="auto" data-src="../images/Private%20Fields/Untitled%201.png" alt="Private%20Fields/Untitled%201.png" class="lazyload"></p>
+<p>  那是怎么回事呢？在 <a href="https://stackoverflow.com/questions/41010780/accessors-are-only-available-when-targeting-ecmascript-5-and-higher" target="_blank" rel="noopener">stackoverflow 的一个提问</a>中我找到了原因：我的 <strong><code>tsconfig.json</code> 配置错了</strong>！</p>
 <p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%202.png" alt="Private%20Fields/Untitled%202.png" class="lazyload"></p>
 <p>  我的编译目标版本错了，是 <code>es5</code> ，而报错信息已经明确提示了，要求的版本是 <strong>ES 2015 及以上</strong>。</p>
 </li>
@@ -322,21 +323,16 @@ console.log(a.equals(b));
 
   const jeremy = new Person(&quot;Jeremy Bearimy&quot;);
 
-  jeremy.greet();
-
-</code></pre>
+  jeremy.greet();  
+  console.log(jeremy.#name);
+  //                 ~~~~~
+  // TS18013: Property &#39;#name&#39; is not accessible outside class &#39;Person&#39; because it has a private identifier.</code></pre>
+<p>  报错了！</p>
+<p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%205.png" alt="Private%20Fields/Untitled%205.png" class="lazyload"></p>
+<p>  果然，<strong>私有字段</strong>还是非常犀利的！😊😊😊</p>
 </li>
 </ul>
-<pre><code>console.log(jeremy.#name);
-//                 ~~~~~
-// TS18013: Property &#39;#name&#39; is not accessible outside class &#39;Person&#39; because it has a private identifier.
-```
-
-报错了！
-
-![Private%20Fields/Untitled%205.png](Private%20Fields/Untitled%205.png)
-
-果然，**私有字段**还是非常犀利的！😊😊😊</code></pre><h1 id="私有字段和-private-修饰符的区别"><a href="#私有字段和-private-修饰符的区别" class="headerlink" title="私有字段和 private 修饰符的区别"></a>私有字段和 private 修饰符的区别</h1><ul>
+<h1 id="私有字段和-private-修饰符的区别"><a href="#私有字段和-private-修饰符的区别" class="headerlink" title="私有字段和 private 修饰符的区别"></a>私有字段和 private 修饰符的区别</h1><ul>
 <li>TypeScript 中的 private 修饰符在编译为 JavaScript 后就完全被删掉了，相当于实际上是没有用的。</li>
 <li>私有字段即便编译为 JavaScript 也会存在。</li>
 </ul>
@@ -388,7 +384,7 @@ console.log(a.equals(b));
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1583681698423"></script>-->
+<!--<script src="/js/app.js?v=1583682034227"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
