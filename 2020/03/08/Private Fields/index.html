@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%204.png">
 <meta property="og:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled%206.png">
 <meta property="article:published_time" content="2020-03-08T15:16:05.000Z">
-<meta property="article:modified_time" content="2020-03-08T15:20:42.868Z">
+<meta property="article:modified_time" content="2020-03-08T15:30:59.664Z">
 <meta property="article:author" content="十甫寸木南">
 <meta property="article:tag" content="TypeScript">
 <meta property="article:tag" content="精简">
@@ -35,7 +35,7 @@
 <meta name="twitter:image" content="https://sfcmn.github.io/2020/03/08/Private%20Fields/Private%20Fields/Untitled.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
   
-  <!--<link rel="stylesheet" href="/css/style.css?v=1583680852153">-->
+  <!--<link rel="stylesheet" href="/css/style.css?v=1583681463460">-->
 
    
     <style>
@@ -167,11 +167,11 @@
 <a id="more"></a>
 <!-- 以下为正文 -->
 
-<p>Created: Mar 08, 2020 3:47 PM<br>Tags: ECMAScript, Learning, TypeScript, 程序员生涯</p>
 <h1 id="文章-PDF-版"><a href="#文章-PDF-版" class="headerlink" title="文章 PDF 版"></a><a href="https://sfcmn.github.io/pdf/TypeScript/TS_Private_Fields.pdf">文章 PDF 版</a></h1><h1 id="官网说明"><a href="#官网说明" class="headerlink" title="官网说明"></a>官网说明</h1><p><a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#ecmascript-private-fields" target="_blank" rel="noopener">Handbook - TypeScript 3.8</a></p>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>对<strong>私有字段</strong>的支持是从 <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html" target="_blank" rel="noopener">TypeScript 3.8</a> 开始的。(<strong>私有字段</strong>目前在 EcmaScript 中尚处于 <a href="https://github.com/tc39/proposal-class-fields/" target="_blank" rel="noopener">stage-3</a> )</p>
 <p><strong>私有字段以 <code>#</code> 开始</strong>，如下：</p>
-<pre><code>class Person {
+<pre><code>```TypeScript
+class Person {
     #name: string
 
     constructor(name: string) {
@@ -188,46 +188,64 @@ let jeremy = new Person(&quot;Jeremy Bearimy&quot;);
 jeremy.#name
 //     ~~~~~
 // Property &#39;#name&#39; is not accessible outside class &#39;Person&#39;
-// because it has a private identifier.</code></pre><h1 id="私有字段的用法"><a href="#私有字段的用法" class="headerlink" title="私有字段的用法"></a>私有字段的用法</h1><p>私有字段的使用规则：</p>
+// because it has a private identifier.
+```</code></pre><h1 id="私有字段的用法"><a href="#私有字段的用法" class="headerlink" title="私有字段的用法"></a>私有字段的用法</h1><p>私有字段的使用规则：</p>
 <ul>
 <li><strong>私有字段以 <code>#</code> 开始。</strong></li>
 <li><strong>每个私有字段的名字，在被包含的类中，都是唯一的。</strong></li>
 <li><strong>TypeScript 辅助功能修饰符(public、private 等)不能在私有字段上使用。</strong></li>
 <li><strong>私有字段不能在所包含的类之外访问；即使是对于 JavaScript 使用者来说也是如此。</strong></li>
 </ul>
-<p>针对以上规则的第 2 条 “<strong>每个私有字段的名字，在被包含的类中，都是唯一的。”</strong>，有以下示例对其做出解释：</p>
+<p>针对以上规则的第 2 条 “<strong>每个私有字段的名字，在被包含的类中，都是唯一的。</strong>”，有以下示例对其做出解释：</p>
 <ul>
 <li><p>常规属性声明容易在子类中被改写，<strong>私有字段不会被子类改写，每个私有字段，在所包含的类中，都是唯一的。</strong></p>
-<p>  // 常规属性声明<br>  class C {</p>
-<pre><code>foo = 10;
+<pre><code class="TypeScript">  // 常规属性声明
+  class C {
+    foo = 10;
 
-cHelper() {
-  return this.foo;
-}</code></pre><p>  }</p>
-<p>  class D extends C {</p>
-<pre><code>foo = 20;
+    cHelper() {
+      return this.foo;
+    }
+  }
 
-dHelper() {
-  return this.foo;
-}</code></pre><p>  }</p>
-<p>  let instance = new D();<br>  // ‘this.foo’ refers to the same property on each instance.<br>  console.log(instance.cHelper()); // prints ‘20’<br>  console.log(instance.dHelper()); // prints ‘20’</p>
-<p>  // 私有字段声明<br>  class C {</p>
-<pre><code>  #foo = 10;
+  class D extends C {
+    foo = 20;
 
-  cHelper() {
-      return this.#foo;
-  }</code></pre><p>  }</p>
-<p>  class D extends C {</p>
-<pre><code>  #foo = 20;
+    dHelper() {
+      return this.foo;
+    }
+  }
 
-  dHelper() {
-      return this.#foo;
-  }</code></pre><p>  }</p>
-<p>  let instance = new D();<br>  // ‘this.#foo’ refers to a different field within each class.<br>  console.log(instance.cHelper()); // prints ‘10’<br>  console.log(instance.dHelper()); // prints ‘20’</p>
+  let instance = new D();
+  // &#39;this.foo&#39; refers to the same property on each instance.
+  console.log(instance.cHelper()); // prints &#39;20&#39;
+  console.log(instance.dHelper()); // prints &#39;20&#39;</code></pre>
+<pre><code class="TypeScript">  // 私有字段声明
+  class C {
+      #foo = 10;
+
+      cHelper() {
+          return this.#foo;
+      }
+  }
+
+  class D extends C {
+      #foo = 20;
+
+      dHelper() {
+          return this.#foo;
+      }
+  }
+
+  let instance = new D();
+  // &#39;this.#foo&#39; refers to a different field within each class.
+  console.log(instance.cHelper()); // prints &#39;10&#39;
+  console.log(instance.dHelper()); // prints &#39;20&#39;</code></pre>
 </li>
 </ul>
 <p>对于<strong>私有字段</strong>的使用，还需要注意的一点是：<strong>除非在某个对象的类型声明中声明了某个私有字段，否则，在未声明该私有字段的对象中无法使用该私有字段，会报错。</strong></p>
-<pre><code>class Square {
+<pre><code>```TypeScript
+class Square {
     #sideLength: number;
 
     constructor(sideLength: number) {
@@ -245,10 +263,11 @@ const b = { sideLength: 100 };
 // Boom!
 // TypeError: attempted to get private field on non-instance
 // This fails because &#39;b&#39; is not an instance of &#39;Square&#39;.
-console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#私有字段的尝试" class="headerlink" title="私有字段的尝试"></a>私有字段的尝试</h1><p>在看过对<strong>私有字段</strong>的概述及用法介绍后，我实际尝试了一番，但却碰到了一些问题，具体如下：</p>
+console.log(a.equals(b));
+```</code></pre><h1 id="私有字段的尝试"><a href="#私有字段的尝试" class="headerlink" title="私有字段的尝试"></a>私有字段的尝试</h1><p>在看过对<strong>私有字段</strong>的概述及用法介绍后，我实际尝试了一番，但却碰到了一些问题，具体如下：</p>
 <ul>
 <li><p>示例代码：</p>
-<pre><code>  // private-field.ts
+<pre><code class="TypeScript">  // private-field.ts
   class Person {
       #name: string;
 
@@ -263,13 +282,15 @@ console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#�
 
   const jeremy = new Person(&quot;Jeremy Bearimy&quot;);
 
-  jeremy.greet();</code></pre><p>  以上示例代码完全是从官网 Copy 下来的，但是在 IDE 中却显示出错！</p>
+  jeremy.greet();</code></pre>
+<p>  以上示例代码完全是从官网 Copy 下来的，但是在 IDE 中却显示出错！</p>
 <p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled.png" alt="Private%20Fields/Untitled.png" class="lazyload"></p>
 <p>  这是怎么回事呢？</p>
 </li>
 <li><p>看一下报错信息：</p>
-<pre><code>  // TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
-  // Private 标识符仅在 ECMAScript 2015 及更高版本可用</code></pre><p>  原来如此！我当前的版本不支持私有字段！</p>
+<pre><code class="TypeScript">  // TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+  // Private 标识符仅在 ECMAScript 2015 及更高版本可用</code></pre>
+<p>  原来如此！我当前的版本不支持私有字段！</p>
 <p>  但是不对啊，我的 TypeScript 版本就是 3.8 啊！</p>
 <p>  <img data-sizes="auto" data-src="Private%20Fields/Untitled%201.png" alt="Private%20Fields/Untitled%201.png" class="lazyload"></p>
 <p>  那是怎么回事呢？在 <a href="https://stackoverflow.com/questions/41010780/accessors-are-only-available-when-targeting-ecmascript-5-and-higher" target="_blank" rel="noopener">stackoverflow 的一个提问</a>中我找到了原因：我的 <code>**tsconfig.json</code> 配置错了**！</p>
@@ -287,7 +308,7 @@ console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#�
 <li><p>私有字段的效果</p>
 <p>  示例已经顺利运行起来了，那么，到底这个<strong>私有字段</strong>有没有用呢？</p>
 <p>  在之前的示例代码中加上一行：</p>
-<pre><code>  class Person {
+<pre><code class="TypeScript">  class Person {
       #name: string;
 
       constructor(name: string) {
@@ -301,11 +322,15 @@ console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#�
 
   const jeremy = new Person(&quot;Jeremy Bearimy&quot;);
 
-  jeremy.greet();</code></pre></li>
+  jeremy.greet();
+
+</code></pre>
+</li>
 </ul>
-<pre><code>    console.log(jeremy.#name);
-    //                 ~~~~~
-    // TS18013: Property &#39;#name&#39; is not accessible outside class &#39;Person&#39; because it has a private identifier.
+<pre><code>console.log(jeremy.#name);
+//                 ~~~~~
+// TS18013: Property &#39;#name&#39; is not accessible outside class &#39;Person&#39; because it has a private identifier.
+```
 
 报错了！
 
@@ -363,7 +388,7 @@ console.log(a.equals(b));</code></pre><h1 id="私有字段的尝试"><a href="#�
   </div>
   <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js,gh/nexmoe/nexmoe.github.io@latest/js/app.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-<!--<script src="/js/app.js?v=1583680852154"></script>-->
+<!--<script src="/js/app.js?v=1583681463461"></script>-->
 
 
     <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
